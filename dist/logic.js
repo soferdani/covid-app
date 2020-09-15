@@ -87,11 +87,12 @@ class APIManager {
                     data: this.data[2]
                 }]
             },
-        
-            // Configuration options go here
             options: {}
         });
     }
     
-
+    async getUsersInfoFromDB () { //still need to test this part 
+        let dbData = await $.get(`getUsers`)
+        
+    }
 }

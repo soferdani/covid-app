@@ -36,9 +36,12 @@ class Renderer {
         $('#page-content').empty().append(newHTML)
     }
 
-    renderChat(answer, question){
-        $('#chat').append(`<p>${answer}</p>`)
-        $('#chat').append(`<p>${question}</p>`)
+    renderChat(text, bool){
+        if(bool){
+            $('#chat').append(`<p class="chat-msg" id="user-msg">${text}</p><br/><br/>`)
+        }else{
+            $('#chat').append(`<p class="chat-msg" id="domain-msg">${text}</p><br/><br/>`)
+        }
     }
 
     renderQue(res1, res2){

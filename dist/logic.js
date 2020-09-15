@@ -107,12 +107,13 @@ class APIManager {
         })
     }
 
-    async getCurrentCity() {
-        let position = await this.getLocation()
-        console.log(position);
-        // const lat = position.coords.latitude
-        // const long = position.coords.longitude
-        // await this.getStats('', lat, long)
+    async getCurrentCountry() {
+        const position = await this.getLocation()
+        const lat = position.coords.latitude
+        const long = position.coords.longitude
+           const data = await $.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyBpiTf5uzEtJsKXReoOKXYw4RO0ayT2Opc`)
+           return data.results[data.results.length - 1].address_components[0].short_name
+           
     }
     
     async getUsersInfoFromDB () { //still need to test this part 

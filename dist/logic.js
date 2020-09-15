@@ -4,7 +4,11 @@ class APIManager {
     }
 
     async getStats(countryName){
-       const statsData =  $.get('./stats/israel')
+        const date = {
+            from: Date.now() - 30,
+            to: Date.now()
+        }
+       const statsData = await $.get(`/stats/${countryName}`, date)
     }
     
 }

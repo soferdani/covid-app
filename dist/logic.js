@@ -71,10 +71,17 @@ class APIManager {
             data: {
                 labels: this.data[0],
                 datasets: [{
-                    label: 'Dath',
+                    label: 'Death',
+                    fill: false,
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
                     data: this.data[1]
+                },{
+                    label: 'Active',
+                    fill: false,
+                    backgroundColor: 'rgb(25, 181, 254)',
+                    borderColor: 'rgb(41, 128, 185)',
+                    data: this.data[2]
                 }]
             },
         

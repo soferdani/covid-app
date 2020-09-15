@@ -10,7 +10,8 @@ class APIManager {
         if(!to){
             to = Date.now()
         }
-       const statsData = await $.get(`/stats/${countryName}?from=${from}&to=${to}`)
+        this.data = await $.get(`/stats/${countryName}?from=${from}&to=${to}`)
+        
     }
 
     calculaturQue(text){
@@ -57,5 +58,28 @@ class APIManager {
     }
     
 
+    createChart () {
+        let ctx = $('#myChart')
     
+        let myChart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+        
+            // The data for our dataset
+            data: {
+                labels: this.data[0],
+                datasets: [{
+                    label: 'Dath',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: this.data[1]
+                }]
+            },
+        
+            // Configuration options go here
+            options: {}
+        });
+    }
+    
+
 }

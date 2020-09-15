@@ -16,8 +16,6 @@ app.use(express.static(path.join(__dirname, 'node_modules')))
 app.use('/', api)
 
 
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/weather")
-
 const port = process.env.PORT || 3000 
 
 app.listen(port, function (err, res) {

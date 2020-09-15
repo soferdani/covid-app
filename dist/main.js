@@ -1,16 +1,24 @@
+const { create } = require("handlebars")
+
 const display = new Renderer
 const module = new APIManager
 
 const loadPage = function(){
     display.renderHome()
 }
+
 $('#menu-bar').on('click', '#menu-button', function () {
     display.renderMenu()
 })
 
-
 $('#menu-bar').on('click', '#delete-menu', function () {
     display.renderDownMenu()
+})
+
+$('#search-button').on('click', async function () {
+    const countryName = $('#country-input').val()
+    await module.getStats(countryName, '', '')
+    module.createChart(module.data)
 })
 
 $('#home').on('click', function () {
@@ -41,7 +49,8 @@ loadPage()
 //     data: {
 //         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
 //         datasets: [{
-//             label: '# of Votes',
+
+\//             label: '# of Votes',
 //             data: [12, 19, 3, 5, 2, 3],
 //             backgroundColor: [
 //                 'rgba(255, 99, 132, 0.2)',
@@ -88,6 +97,7 @@ const createChart = async function () {
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: this.data[1]
+
             }]
         },
     

@@ -1,16 +1,24 @@
+const { create } = require("handlebars")
+
 const display = new Renderer
 const module = new APIManager
 
 const loadPage = function(){
     display.renderHome()
 }
+
 $('#menu-bar').on('click', '#menu-button', function () {
     display.renderMenu()
 })
 
-
 $('#menu-bar').on('click', '#delete-menu', function () {
     display.renderDownMenu()
+})
+
+$('#search-button').on('click', async function () {
+    const countryName = $('#country-input').val()
+    await module.getStats(countryName, '', '')
+    module.createChart(module.data)
 })
 
 $('#home').on('click', function () {
@@ -33,6 +41,8 @@ $('#page-content').on('click', '.answer', function () {
 })
 
 loadPage()
+
+console.log(moment(Date.now());
 
 let ctx = $('#myChart')
 // let ct = $('#page-content')

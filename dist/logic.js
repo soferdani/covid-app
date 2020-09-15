@@ -110,13 +110,6 @@ class APIManager {
     async getCurrentCity() {
         let position = await this.getLocation()
         console.log(position);
-        $.getJSON('http://ws.geonames.org/countryCode', {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            type: 'JSON'
-        }, function(result) {
-            alert(result.countryName);
-        });
         // const lat = position.coords.latitude
         // const long = position.coords.longitude
         // await this.getStats('', lat, long)

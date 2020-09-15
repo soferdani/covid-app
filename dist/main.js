@@ -1,9 +1,11 @@
 const display = new Renderer
 const module = new APIManager
 
-const loadPage = function(){
-
+const loadPage = async function(){
     display.renderHome()
+    const countryName = await module.getCurrentCountry()
+    await module.getStats(countryName, '', '')
+    module.createChart()
 }
 
 $('#menu-bar').on('click', '#menu-button', function () {
@@ -18,10 +20,12 @@ $('#search-button').on('click', async function () {
     const countryName = $('#country-input').val()
     await module.getStats(countryName, '', '')
     module.createChart()
+    $('#country-input').val('')
 })
 
 $('#home').on('click', function () {
     display.renderHome()
+    loadPage()
 })
 
 $('#covid-calculator').on('click', function () {
@@ -31,16 +35,19 @@ $('#covid-calculator').on('click', function () {
 $('#page-content').on('click', '.answer', function () {
     const text = $(this).text()
     const next = module.calculaturQue(text)
-    if (next[0] === 'Please submit your info for answers') {
-        display.renderUserForm()
-    } else {
-        if (next[0] === 'Please submit your info and date of exposer for answers') {
-            display.renderDate()
+    display.renderChat(text, true)
+    setTimeout(function(){ 
+        display.renderChat(next[0], false)
+        if (next[0] === 'Please submit your info for answers') {
+            display.renderUserForm()
         } else {
-            display.renderQue(next[1], next[2])
+            if (next[0] === 'Please submit your info and date of exposer for answers') {
+                display.renderDate()
+            } else {
+                display.renderQue(next[1], next[2])
+            }
         }
-    }
-    display.renderChat(text, next[0])
+    }, 700)
 })
 
 $('#page-content').on('click', '.submit-user', function () {
@@ -53,7 +60,7 @@ $('#page-content').on('click', '.submit-user', function () {
 })
 
 loadPage()
-module.getCurrentCity()
+
 
 
 

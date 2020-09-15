@@ -46,6 +46,7 @@
 
   #calculatur{
       display: grid;
+      position: relative;
       grid-template-rows: 5fr 1fr;
   }
   .answer{
@@ -55,3 +56,24 @@
   #msg{
       color: green;
   }
+  .chat-msg{
+      border-radius: 4px;
+      display: inline-block;
+      position: absolute;
+      
+  }
+    #user-msg{
+    background-color: #2ecc71;
+    right: 0;
+    
+}
+    #domain-msg{
+    background-color: #95a5a6;
+    left: 0;
+    
+}
+#answers{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,6 +1,8 @@
 const express = require('express')
 const axios = require('axios')
 const router = express.Router()
+const User = require('../model/User')
+
 
 router.get("/stats/:country" ,async (req, res) => {
     const {country} = req.params
@@ -16,6 +18,19 @@ router.get("/stats/:country" ,async (req, res) => {
         res.send(err)
     }
 })
+
+
+
+router.post("/saveUser", async (req,res) => {
+    try{
+        let UserToSaveInDB = req.body
+        toSave = new User (UserToSaveInDB)
+        toSave.save()
+        res.send ("new city has beed added")
+    } catch (err) {
+        res.send(err)
+    }
+})  
 
 
 

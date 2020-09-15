@@ -11,4 +11,6 @@ class APIManager {
        const statsData = await $.get(`/stats/${countryName}`, date)
     }
     
+
+    
 }

@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 const UserSchema = new Schema ({
     name: String,
     email: String,
-    date: Date
+    date: Date,
+    status: String
 })
 
 const User = mongoose.model("User",UserSchema)

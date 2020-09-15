@@ -36,6 +36,14 @@ router.post("/saveUser", async (req,res) => {
 
 
 
+router.get('/getUsers', async (req,res)=> {
+    try{
+        let toSend = await User.find({})
+        res.send(toSend)
+    } catch(err) {
+        res.send(err)
+    }
+})
 
 
 

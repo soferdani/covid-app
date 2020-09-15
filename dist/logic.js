@@ -94,7 +94,7 @@ class APIManager {
                     data: this.data[2]
                 }]
             },
-        
+
             options: {}
         });
     }
@@ -115,5 +115,9 @@ class APIManager {
         // await this.getStats('', lat, long)
     }
     
-
+    async getUsersInfoFromDB () { //still need to test this part 
+        let dbData = await $.get(`getUsers`)
+        
+    }
 }
+

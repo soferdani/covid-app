@@ -61,7 +61,7 @@ class Renderer {
     }
 
     renderThankyou(){
-        $('#page-content').empty().append('<div id="msg">Thank you the results soon will arrive</div>')
+        $('#page-content').empty().append('<div id="msg">Thank you the results will arrive soon</div>')
     }
 
 }

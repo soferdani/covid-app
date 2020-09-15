@@ -4,6 +4,7 @@ const display = new Renderer
 const module = new APIManager
 
 const loadPage = function(){
+
     display.renderHome()
 }
 
@@ -18,7 +19,7 @@ $('#menu-bar').on('click', '#delete-menu', function () {
 $('#search-button').on('click', async function () {
     const countryName = $('#country-input').val()
     await module.getStats(countryName, '', '')
-    module.createChart(module.data)
+    module.createChart()
 })
 
 $('#home').on('click', function () {
@@ -53,29 +54,5 @@ $('#page-content').on('click', '.submit-user', function () {
 
 loadPage()
 
-
-const createChart = async function () {
-    let ctx = $('#myChart')
-
-    let myChart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
-    
-        // The data for our dataset
-        data: {
-            labels: this.data[0],
-            datasets: [{
-                label: 'Dath',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: this.data[1]
-
-            }]
-        },
-    
-        // Configuration options go here
-        options: {}
-    });
-}
 
 

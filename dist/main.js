@@ -1,4 +1,4 @@
-// const { create } = require("handlebars")
+
 
 const display = new Renderer
 const module = new APIManager
@@ -35,10 +35,21 @@ $('#page-content').on('click', '.answer', function () {
     const next = module.calculaturQue(text)
     if(next[0] === 'Please submit your info for answers'){
         display.renderUserForm()
+    }else{if(next[0] === 'Please submit your info and date of exposer for answers'){
+        display.renderDate()
     }else{
         display.renderQue(next[1], next[2])
     }
+    }
     display.renderChat(text, next[0])
+})
+
+$('#page-content').on('click', '.submit-user', function () {
+    const name = $(this).closest('div').find('.name-input').val()
+    const email = $(this).closest('div').find('.mail-input').val()
+    const date = $(this).closest('div').find('.date-input').val()
+    module.saveUser(name, email, date)
+    display.renderThankyou()
 })
 
 loadPage()

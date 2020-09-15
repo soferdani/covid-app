@@ -12,8 +12,11 @@ class APIManager {
         }
 
         this.data = await $.get(`/stats/${countryName}?from=${from}&to=${to}`)
-        
+    }
 
+    async saveUser(name, email, date){
+        const res = await $.post('/saveUser', {name, email, date})
+        console.log(res);
     }
 
     calculaturQue(text){
@@ -27,7 +30,7 @@ class APIManager {
             return ['Please submit your info for answers', '', '']
         }
         if(text === 'Close space'){
-            return ['when?', '', '']
+            return ['Please submit your info and date of exposer for answers', '', '']
         }
         if(text === 'Open space'){
             return ['Please submit your info for answers', '', '']
@@ -44,7 +47,7 @@ class APIManager {
         }
 
         if(text === "I returned from abroad"){
-            return ['when?', '', '']
+            return ['Please submit your info and date of exposer for answers', '', '']
         }
 
         if(text === "I'm a verified corona patient"){

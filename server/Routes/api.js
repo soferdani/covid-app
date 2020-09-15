@@ -29,7 +29,7 @@ router.post("/saveUser", async (req,res) => {
         let UserToSaveInDB = req.body
         toSave = new User (UserToSaveInDB)
         toSave.save()
-        res.send ("new city has beed added")
+        res.send (toSave)
     } catch (err) {
         res.send(err)
     }

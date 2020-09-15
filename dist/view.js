@@ -53,4 +53,15 @@ class Renderer {
         $('#answers').empty().append(newHTML)
     }
 
+    renderDate(){
+        const source = $('#date-template').html()
+        const template = Handlebars.compile(source)
+        const newHTML = template()
+        $('#answers').empty().append(newHTML)
+    }
+
+    renderThankyou(){
+        $('#page-content').empty().append('<div id="msg">Thank you the results soon will arrive</div>')
+    }
+
 }

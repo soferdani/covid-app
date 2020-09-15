@@ -10,7 +10,6 @@ router.get("/stats/:country" ,async (req, res) => {
     console.log(country);
     console.log(from , to);
     try{
-        //const response = await axios.get(`https://api.covid19api.com/total/dayone/country/${country}`);
         const response = await axios.get(`https://api.covid19api.com/country/${country}?from=${from}&to=${to}`);
         let dataToTheUser = (response.data)
         res.send(dataToTheUser)

@@ -47,11 +47,10 @@ class Renderer {
     }
 
     renderUserForm(){
-        $('#answers').empty().append(`<div>
-                                        <input placeholder="Enter your name">
-                                        <input placeholder="Enter your mail">
-                                        <button class="submit-user">Submit</button>
-                                    </div>`)
+        const source = $('#userForm-template').html()
+        const template = Handlebars.compile(source)
+        const newHTML = template()
+        $('#answers').empty().append(newHTML)
     }
 
 }

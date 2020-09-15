@@ -11,15 +11,33 @@
 <body>
    <div id="container">
        <div id="nav-bar">
-           <p><input id="country-input" placeholder="Country"><span id="#search-button"><i class="fas fa-search"></i></span></p>
-           <p><span id="menu"><i class="fas fa-bars"></i></span></p>
+            <p>
+                <input id="country-input" placeholder="Country">
+            </p>
+            <p>
+                <span id="search-button"><i class="fas fa-search"></i></span>
+                <span id="menu-bar"><span id="menu-button"><i class="fas fa-bars"></i></span></span>
+            </p>
+       </div>
         </div>
        <div id="page-content">
-           <div id="graphs"></div>
+           <div id="graphs">
+            <canvas id="myChart" width="400" height="400"></canvas>
+           </div>
            <div id="news"></div>
        </div>
    </div>
-    
+
+    <script id="menu-template" type="text/x-handlebars-template">
+        <div>corona calculatur</div>
+        <div>graphs</div>
+        <div>news</div>
+        <div>about us</div>
+    </script>
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/handlebars/dist/handlebars.js"></script>
+    <script src="view.js"></script>
+    <script src="logic.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

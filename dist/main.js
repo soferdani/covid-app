@@ -35,9 +35,9 @@ $('#covid-calculator').on('click', function () {
 $('#page-content').on('click', '.answer', function () {
     const text = $(this).text()
     const next = module.calculaturQue(text)
-    display.renderChat(text, true)
+    display.renderChat(text, "user-msg")
     setTimeout(function(){ 
-        display.renderChat(next[0], false)
+        display.renderChat(next[0], 'domain-msg')
         if (next[0] === 'Please submit your info for answers') {
             display.renderUserForm()
         } else {

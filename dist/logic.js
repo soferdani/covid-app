@@ -119,5 +119,11 @@ class APIManager {
         let dbData = await $.get(`getUsers`)
         
     }
+
+    
+    // async sendMail(){
+    //     const res = await $.post('/sendMail', {name, email, date, status})
+    //     console.log(res);
+    // }
 }
 

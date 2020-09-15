@@ -1,5 +1,3 @@
-
-
 const display = new Renderer
 const module = new APIManager
 
@@ -33,13 +31,14 @@ $('#covid-calculator').on('click', function () {
 $('#page-content').on('click', '.answer', function () {
     const text = $(this).text()
     const next = module.calculaturQue(text)
-    if(next[0] === 'Please submit your info for answers'){
+    if (next[0] === 'Please submit your info for answers') {
         display.renderUserForm()
-    }else{if(next[0] === 'Please submit your info and date of exposer for answers'){
-        display.renderDate()
-    }else{
-        display.renderQue(next[1], next[2])
-    }
+    } else {
+        if (next[0] === 'Please submit your info and date of exposer for answers') {
+            display.renderDate()
+        } else {
+            display.renderQue(next[1], next[2])
+        }
     }
     display.renderChat(text, next[0])
 })
@@ -48,11 +47,13 @@ $('#page-content').on('click', '.submit-user', function () {
     const name = $(this).closest('div').find('.name-input').val()
     const email = $(this).closest('div').find('.mail-input').val()
     const date = $(this).closest('div').find('.date-input').val()
-    module.saveUser(name, email, date)
+    const status = module.status
+    module.saveUser(name, email, date, status)
     display.renderThankyou()
 })
 
 loadPage()
+module.getCurrentCity()
 
 
 

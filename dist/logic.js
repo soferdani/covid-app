@@ -1,6 +1,7 @@
 class APIManager {
     constructor(){
         this.data = []
+        this.status = ''
     }
 
     async getStats(countryName, from, to){
@@ -14,8 +15,8 @@ class APIManager {
         this.data = await $.get(`/stats/${countryName}?from=${from}&to=${to}`)
     }
 
-    async saveUser(name, email, date){
-        const res = await $.post('/saveUser', {name, email, date})
+    async saveUser(name, email, date, status){
+        const res = await $.post('/saveUser', {name, email, date, status})
         console.log(res);
     }
 
@@ -27,12 +28,15 @@ class APIManager {
             return ['where?', 'Close space','Open space']
         }
         if(text === 'Less than 15 minutes'){
+            this.status = ""
             return ['Please submit your info for answers', '', '']
         }
         if(text === 'Close space'){
+            this.status = "exposed"
             return ['Please submit your info and date of exposer for answers', '', '']
         }
         if(text === 'Open space'){
+            this.status = ""
             return ['Please submit your info for answers', '', '']
         }
 
@@ -40,13 +44,16 @@ class APIManager {
             return ['Whats your temprature?' , 'More than 38 degrees', 'Less than 38 degrees']
         }
         if(text === 'More than 38 degrees'){
+            this.status = "symptoms"
             return ['Please submit your info for answers', '', '']
         }
         if(text === 'Less than 38 degrees'){
+            this.status = ""
             return ['Please submit your info for answers', '', '']
         }
 
         if(text === "I returned from abroad"){
+            this.status = "abroad"
             return ['Please submit your info and date of exposer for answers', '', '']
         }
 
@@ -54,9 +61,11 @@ class APIManager {
             return ['Do you have symptoms?' , 'Yes', 'No']
         }
         if(text === 'Yes'){
+            this.status = "sick with symptoms"
             return ['Please submit your info for answers', '', '']
         }
         if(text === 'No'){
+            this.status = "sick with out symptoms"
             return ['Please submit your info for answers', '', '']
         }
 
@@ -67,10 +76,8 @@ class APIManager {
         let ctx = $('#myChart')
     
         let myChart = new Chart(ctx, {
-            // The type of chart we want to create
             type: 'line',
         
-            // The data for our dataset
             data: {
                 labels: this.data[0],
                 datasets: [{
@@ -87,8 +94,25 @@ class APIManager {
                     data: this.data[2]
                 }]
             },
+
             options: {}
         });
+    }
+
+    async getLocation() {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(resolve, reject)
+            }
+        })
+    }
+
+    async getCurrentCity() {
+        let position = await this.getLocation()
+        console.log(position);
+        // const lat = position.coords.latitude
+        // const long = position.coords.longitude
+        // await this.getStats('', lat, long)
     }
     
     async getUsersInfoFromDB () { //still need to test this part 

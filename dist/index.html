@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
     <link rel="stylesheet" href="style.css">
     <title>hakaton</title>
 </head>
+
 <body>
-   <!-- <div id="container">
-       <div id="nav-bar">
+    <div id="container">
+        <div id="nav-bar">
             <p>
                 <input id="country-input" placeholder="Country">
             </p>
@@ -18,26 +20,37 @@
                 <span id="search-button"><i class="fas fa-search"></i></span>
                 <span id="menu-bar"><span id="menu-button"><i class="fas fa-bars"></i></span></span>
             </p>
-       </div>
         </div>
-       <div id="page-content">
-           <div id="graphs">
-            <canvas id="myChart" width="400" height="400"></canvas>
-           </div>
-           <div id="news"></div>
-       </div>
-   </div> -->
+
+        <div id="menu-option">
+            <div class="menu-select" id="covid-calculator">corona calculatur</div>
+            <div class="menu-select">graphs</div>
+            <div class="menu-select">news</div>
+            <div class="menu-select">about us</div>
+        </div>
+
+        <div id="page-content">
+
+            <div id="home">
+                <canvas id="myChart" width="400" height="400"></canvas>
+                <div id="news">news</div>
+            </div>
 
 
-   <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+
+    </div>
 
 
 
-    <script id="menu-template" type="text/x-handlebars-template">
-        <div>corona calculatur</div>
-        <div>graphs</div>
-        <div>news</div>
-        <div>about us</div>
+    <script id="calculatur-template" type="text/x-handlebars-template">
+        <div id="calculatur">
+            <div id="question">What happend?</div>
+            <div class="answer">I was exposed to a verified patient</div>
+            <div class="answer">I'm not feeling well</div>
+            <div class="answer">I returned from abroad</div>
+            <div class="answer">I'm a verified corona patient</div>
+        </div>
     </script>
 
     <script src="/chart.js/dist/Chart.js"></script>
@@ -47,4 +60,5 @@
     <script src="logic.js"></script>
     <script src="main.js"></script>
 </body>
+
 </html>

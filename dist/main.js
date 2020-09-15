@@ -1,15 +1,18 @@
 const display = new Renderer
 const api = new APIManager
 
-$('#menu-button').on('click', function () {
+$('#menu-bar').on('click', '#menu-button', function () {
     display.renderMenu()
 })
 
 
-$('#search-button').on('click', function () {
-    console.log("hello");
+$('#menu-bar').on('click', '#delete-menu', function () {
+    display.renderDownMenu()
 })
 
+$('#covid-calculator').on('click', function () {
+    display.renderCalculator()
+})
 
 
 let ctx = $('#myChart')

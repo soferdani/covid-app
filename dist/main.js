@@ -1,6 +1,9 @@
 const display = new Renderer
-const api = new APIManager
+const module = new APIManager
 
+const loadPage = function(){
+    display.renderHome()
+}
 $('#menu-bar').on('click', '#menu-button', function () {
     display.renderMenu()
 })
@@ -10,12 +13,29 @@ $('#menu-bar').on('click', '#delete-menu', function () {
     display.renderDownMenu()
 })
 
+$('#home').on('click', function () {
+    display.renderHome()
+})
+
 $('#covid-calculator').on('click', function () {
     display.renderCalculator()
 })
 
+$('#page-content').on('click', '.answer', function () {
+    const text = $(this).text()
+    const next = module.calculaturQue(text)
+    if(next[0] === 'Please submit your info for answers'){
+        display.renderUserForm()
+    }else{
+        display.renderQue(next[1], next[2])
+    }
+    display.renderChat(text, next[0])
+})
+
+loadPage()
 
 let ctx = $('#myChart')
+// let ct = $('#page-content')
 let myChart = new Chart(ctx, {
     type: 'bar',
     data: {

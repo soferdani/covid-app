@@ -23,33 +23,39 @@
         </div>
 
         <div id="menu-option">
-            <div class="menu-select" id="covid-calculator">corona calculatur</div>
-            <div class="menu-select">graphs</div>
-            <div class="menu-select">news</div>
-            <div class="menu-select">about us</div>
+            <div class="menu-select" id="home">Home</div>
+            <div class="menu-select" id="covid-calculator">Corona Chat</div>
+            <div class="menu-select">Graphs</div>
+            <div class="menu-select">News</div>
+            <div class="menu-select">About Us</div>
         </div>
 
         <div id="page-content">
-
-            <div id="home">
-                <canvas id="myChart" width="400" height="400"></canvas>
-                <div id="news">news</div>
-            </div>
-
 
         </div>
 
     </div>
 
+    <script id="home-template" type="text/x-handlebars-template">
+        <div id="home">
+            <canvas id="myChart" width="400" height="400"></canvas>
+            <div id="news">news</div>
+        </div>
+    </script>
 
 
     <script id="calculatur-template" type="text/x-handlebars-template">
         <div id="calculatur">
-            <div id="question">What happend?</div>
-            <div class="answer">I was exposed to a verified patient</div>
-            <div class="answer">I'm not feeling well</div>
-            <div class="answer">I returned from abroad</div>
-            <div class="answer">I'm a verified corona patient</div>
+            <div id="chat">
+                <p>What happend?</p>
+            </div>
+            
+            <div id="answers">
+                <div class="answer" id="exposed">I was exposed to a verified patient</div>
+                <div class="answer" id="feeling">I'm not feeling well</div>
+                <div class="answer" id="abroad">I returned from abroad</div>
+                <div class="answer" id="verified">I'm a verified corona patient</div>
+            </div>
         </div>
     </script>
 

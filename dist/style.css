@@ -44,5 +44,12 @@
     border-bottom: 1px #dfe4ea solid; 
   }
 
-  
+  #calculatur{
+      display: grid;
+      grid-template-rows: 5fr 1fr;
+  }
+  .answer{
+      border: 1px black solid;
+      width: 100%;
+  }
   

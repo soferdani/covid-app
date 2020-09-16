@@ -70,15 +70,9 @@
 
     <script id="userForm-template" type="text/x-handlebars-template">
         <div>
-            <input class="name-input" placeholder="Enter your name">
-            <input class="mail-input" placeholder="Enter your mail">
-            <button class="submit-user">Submit</button>
-        </div>
-    </script>
-
-    <script id="date-template" type="text/x-handlebars-template">
-        <div>
+            {{#if date}}
             <input class="date-input" placeholder="Enter date" type="datetime">
+            {{/if}}
             <input class="name-input" placeholder="Enter your name">
             <input class="mail-input" placeholder="Enter your mail">
             <button class="submit-user">Submit</button>

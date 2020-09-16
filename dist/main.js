@@ -2,7 +2,8 @@ const display = new Renderer
 const module = new APIManager
 
 const loadPage = async function(){
-    display.renderHome()
+    display.renderPage('home')
+    display.addOption()
     const countryName = await module.getCurrentCountry()
     module.countryName = countryName
     await module.getStats(countryName, '', '')
@@ -14,7 +15,7 @@ $('#menu-bar').on('click', '#menu-button', function () {
 })
 
 $('#menu-bar').on('click', '#delete-menu', function () {
-    display.renderDownMenu()
+    display.renderOfMenu()
 })
 
 $('#search-button').on('click', async function () {
@@ -26,12 +27,13 @@ $('#search-button').on('click', async function () {
 })
 
 $('#home').on('click', function () {
-    display.renderHome()
+    display.renderPage('home')
+    display.addOption()
     loadPage()
 })
 
 $('#covid-calculator').on('click', function () {
-    display.renderCalculator()
+    display.renderPage('calculatur')
 })
 
 $('#page-content').on('click', '.answer', function () {
@@ -40,11 +42,11 @@ $('#page-content').on('click', '.answer', function () {
     display.renderChat(text, "user-msg")
     setTimeout(function(){ 
         display.renderChat(next[0], 'domain-msg')
-        if (next[0] === 'Please submit your info for answers') {
-            display.renderUserForm()
+        if (next[0] === 'We got results! Please submit your info for answers') {
+            display.renderUserForm(false)
         } else {
-            if (next[0] === 'Please submit your info and date of exposer for answers') {
-                display.renderDate()
+            if (next[0] === 'We got results! Please submit your info and date of exposer for answers') {
+                display.renderUserForm(true)
             } else {
                 display.renderQue(next[1], next[2])
             }

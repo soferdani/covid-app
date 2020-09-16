@@ -24,15 +24,15 @@ class APIManager {
         }
         if(text === 'Less than 15 minutes'){
             this.status = "healthy"
-            return ['Please submit your info for answers', '', '']
+            return ['We got results! Please submit your info for answers', '', '']
         }
         if(text === 'Close space'){
             this.status = "exposed"
-            return ['Please submit your info and date of exposer for answers', '', '']
+            return ['We got results! Please submit your info and date of exposer for answers', '', '']
         }
         if(text === 'Open space'){
             this.status = "healthy"
-            return ['Please submit your info for answers', '', '']
+            return ['We got results! Please submit your info for answers', '', '']
         }
 
         if(text === "I'm not feeling well"){
@@ -40,16 +40,16 @@ class APIManager {
         }
         if(text === 'More than 38 degrees'){
             this.status = "symptoms"
-            return ['Please submit your info for answers', '', '']
+            return ['We got results! Please submit your info for answers', '', '']
         }
         if(text === 'Less than 38 degrees'){
             this.status = "healthy"
-            return ['Please submit your info for answers', '', '']
+            return ['We got results! Please submit your info for answers', '', '']
         }
 
         if(text === "I returned from abroad"){
             this.status = "abroad"
-            return ['Please submit your info and date of exposer for answers', '', '']
+            return ['We got results! Please submit your info and date of exposer for answers', '', '']
         }
 
         if(text === "I'm a verified corona patient"){
@@ -57,11 +57,11 @@ class APIManager {
         }
         if(text === 'Yes'){
             this.status = "sick with symptoms"
-            return ['Please submit your info for answers', '', '']
+            return ['We got results! Please submit your info for answers', '', '']
         }
         if(text === 'No'){
             this.status = "sick with out symptoms"
-            return ['Please submit your info for answers', '', '']
+            return ['We got results! Please submit your info for answers', '', '']
         }
 
     }

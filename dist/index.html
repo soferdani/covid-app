@@ -26,7 +26,7 @@
             <div class="menu-select" id="home">Home</div>
             <div class="menu-select" id="covid-chat">Corona Chat</div>
             <div class="menu-select" id="stats" >Stats</div>
-            <div class="menu-select">News</div>
+            <div class="menu-select" id="news-bar">News</div>
             <div class="menu-select" id="about">About Us</div>
         </div>
 
@@ -37,7 +37,8 @@
     </div>
 
     <script id="home-template" type="text/x-handlebars-template">
-        <div id="home">
+            <div id="push-news">news</div>
+            <p id="news"></p>
             
             <label id="Start-date">From<br />
                 <select class="first" name="date_of_start:date" tsabindex="7" id="start">
@@ -48,8 +49,6 @@
                 </select>     
             </label>
             <div id="chart-template"><canvas id="myChart" width="400" height="400"></canvas></div>
-            <div id="news">news</div>
-        </div>
     </script>
 
 
@@ -94,6 +93,16 @@
     <script id="about-template" type="text/x-handlebars-template">
         <div>This website was created and designed by Dani Sofer and Yuval Lotem, for more information and data contact us with the details below </div>
         <div id="details">email: hackathon@elevation.com <br/> phone number: +8374892847</div>
+    </script>
+
+    <script id="news-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <h4>{{this.title}}</h4>
+        <h5>Author: {{this.author}}</h5>
+        <div>{{this.description}}</div>
+        <img src="{{this.urlToImage}}">
+        <div><a href="{{this.url}}">Click for the full artical</a></div>
+        {{/each}}
     </script>
 
 

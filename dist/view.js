@@ -60,4 +60,24 @@ class Renderer {
         const newHTML = template(worldstats)
         $('#world-stats').empty().append(newHTML)
     }
+
+    renderNewsPage(news){
+        this.renderOfMenu()
+        const source = $(`#news-template`).html()
+        const template = Handlebars.compile(source)
+        const newHTML = template(news)
+        $('#page-content').empty().append(newHTML)
+    }
+
+    renderNews(news){
+        $('#news').empty().append(`<p>${news[0].title}</p>`)
+        let i = 1;
+        setInterval(function(){
+            $('#news').empty().append(`<p>${news[i].title}</p>`)
+            i++
+            if(i === 5){
+                i = 0
+            }
+        }, 4000)
+    }
 }

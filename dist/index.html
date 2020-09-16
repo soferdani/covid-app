@@ -13,9 +13,9 @@
 <body>
     <div id="container">
         <div id="nav-bar">
-            <p>
-                <input id="country-input" placeholder="Country">
-            </p>
+            <p>Covid-Center</p>
+            <i class="fas fa-crown"></i>
+            <p><input id="country-input" placeholder="Country"></p>
             <p>
                 <span id="search-button"><i class="fas fa-search"></i></span>
                 <span id="menu-bar"><span id="menu-button"><i class="fas fa-bars"></i></span></span>
@@ -24,10 +24,10 @@
 
         <div id="menu-option">
             <div class="menu-select" id="home">Home</div>
-            <div class="menu-select" id="covid-calculator">Corona Chat</div>
-            <div class="menu-select">Graphs</div>
+            <div class="menu-select" id="covid-chat">Corona Chat</div>
+            <div class="menu-select" id="stats" >Stats</div>
             <div class="menu-select">News</div>
-            <div class="menu-select">About Us</div>
+            <div class="menu-select" id="about">About Us</div>
         </div>
 
         <div id="page-content">
@@ -69,15 +69,32 @@
     </script>
 
     <script id="userForm-template" type="text/x-handlebars-template">
-        <div>
+        <div id="user-form">
             {{#if date}}
             <input class="date-input" placeholder="Enter date" type="datetime">
             {{/if}}
             <input class="name-input" placeholder="Enter your name">
-            <input class="mail-input" placeholder="Enter your mail">
+            <input class="mail-input" placeholder="Enter your email">
             <button class="submit-user">Submit</button>
         </div>
     </script>
+
+    <script id="stats-template" type="text/x-handlebars-template">
+        <div id="world-stats">here will be some stats from around the world</div>
+        <div id="countries-stats">here will be some graphs from chosen countrys</div>
+    </script>
+
+    <script id="world-stats-template" type="text/x-handlebars-template">
+        <div>Total active: {{this.TotalConfirmed}}</div>
+        <div>Total death cases: {{this.TotalDeaths}}</div>
+        <div>Total recovered: {{this.TotalRecovered}}</div>
+    </script>
+
+    <script id="about-template" type="text/x-handlebars-template">
+        <div>This website was created and designed by Dani Sofer and Yuval Lotem, for more information and data contact us with the details below </div>
+        <div id="details">email: hackathon@elevation.com <br/> phone number: +8374892847</div>
+    </script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <!-- <script src="/moment/dist/moment.js"></script> -->

@@ -1,17 +1,16 @@
-/* #container{
-    display: grid;
+#container{
+    /* display: grid;
     grid-template-rows: 1fr 7fr;
     background-color: #dfe6e9;
     position: absolute;
     top: 0;
     left: 0;
     height: 100vh;
-    width: 100vw;
-
-} */
+    width: 100vw; */
+}
 #nav-bar{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 1fr 2fr 1fr;
     background-color: #f5f6fa;
     border-bottom: 1px black solid;
     position: sticky;
@@ -48,10 +47,14 @@
       display: grid;
       position: relative;
       grid-template-rows: 5fr 1fr;
+      width: 100%;
   }
   .answer{
-      border: 1px black solid;
-      width: 100%;
+      width: 98%;
+      background-color: #3498db;
+      margin: 5px;
+      padding-top: 5px;
+      box-shadow: 1px 1px 5px black;
   }
   #msg{
       color: green;
@@ -75,8 +78,45 @@
 #answers{
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
 }
 label{
     display: inline-block;
 }
+#eror{
+    color: red;
+}
+#details{
+    background-color: #3498db;
+    border: 1px white solid;
+    box-shadow: 1px 1px 5px #7f8c8d;
+    bottom: 0;
+    width: 100%;
+    padding: 2px;
+    position: fixed;
+}
+#user-form{
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-gap: 5px;
+    border: 1px black solid;
+    background-color: #2d3436;
+    color: white;
+    width: 100%;
+}
+#user-form>input{
+    text-align: center;
+    border: none;
+    border-bottom: 0.5px #7f8c8d solid;
+    color: white;
+    background-color: #2d3436;
+}
+
+.submit-user{
+    border: none;
+    background-color: #2ecc71;
+    border-radius: 20px;
+    width: 15vw;
+}
+

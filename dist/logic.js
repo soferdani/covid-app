@@ -6,13 +6,6 @@ class APIManager {
     }
 
     async getStats(countryName, from, to){
-        if(!from){
-            from = Date.now() - 300000000
-        }
-        if(!to){
-            to = Date.now()
-        }
-
         this.data = await $.get(`/stats/${countryName}?from=${from}&to=${to}`)
     }
 
@@ -76,12 +69,13 @@ class APIManager {
 
     createChart () {
         let ctx = $('#myChart')
-    
+        const prettyDates = this.data[0].map(d => moment(d).format('L'))
+        
         let myChart = new Chart(ctx, {
             type: 'line',
         
             data: {
-                labels: this.data[0],
+                labels: prettyDates,
                 datasets: [{
                     label: 'Death',
                     fill: false,

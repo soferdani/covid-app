@@ -15,6 +15,11 @@ class APIManager {
         const sendTheMail = await $.post('/sendMail',dataToRouts)
     }
 
+    async getWorldStats(){
+        this.worldStats = await $.get(`/infoForCharts1`)
+    }
+
+
     calculaturQue(text){
         if(text === 'I was exposed to a verified patient'){
             return ['For how long?' , 'More than 15 minutes', 'Less than 15 minutes']

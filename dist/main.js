@@ -20,10 +20,16 @@ $('#menu-bar').on('click', '#delete-menu', function () {
 
 $('#search-button').on('click', async function () {
     const countryName = $('#country-input').val()
-    module.countryName = countryName
-    await module.getStats(countryName, '', '')
-    module.createChart()
     $('#country-input').val('')
+    module.countryName = countryName
+    try{
+        await module.getStats(countryName, '', '')
+        module.createChart()
+    }
+    catch{
+        display.renderEror()
+    }
+    
 })
 
 $('#home').on('click', function () {
@@ -32,8 +38,22 @@ $('#home').on('click', function () {
     loadPage()
 })
 
-$('#covid-calculator').on('click', function () {
+$('#covid-chat').on('click', function () {
     display.renderPage('calculatur')
+})
+
+$('#stats').on('click',async function () {
+    display.renderPage('stats')
+    //await module.getWorldStats()
+    display.renderStats({TotalConfirmed: 20394, TotalDeaths:2034, TotalRecovered:90236})
+    //module.worldStats
+})
+
+$('#about').on('click', function () {
+    display.renderPage('about')
+    //await module.getWorldStats()
+    display.renderStats({TotalConfirmed: 20394, TotalDeaths:2034, TotalRecovered:90236})
+    //module.worldStats
 })
 
 $('#page-content').on('click', '.answer', function () {

@@ -50,4 +50,18 @@ class Renderer {
         }
     }
 
+    renderEror(){//not working yet
+        $('#myChart').append('<div id="eror">Please try diffrent country name</div>')
+    }
+
+    renderStats(worldstats){
+        // const {TotalConfirmed} = this.worldStats
+        // const {TotalDeaths} = this.worldStats
+        // const {TotalRecovered} = this.worldStats
+        // const total = TotalRecovered + TotalDeaths + TotalConfirmed
+        const source = $(`#world-stats-template`).html()
+        const template = Handlebars.compile(source)
+        const newHTML = template(worldstats)
+        $('#world-stats').empty().append(newHTML)
+    }
 }

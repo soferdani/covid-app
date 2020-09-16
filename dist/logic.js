@@ -172,11 +172,40 @@ class APIManager {
            
     }
     
-    async getUsersInfoFromDB () { //still need to test this part 
-        let dbData = await $.get(`getUsers`)
-        
+    async getUsersInfoFromDB () { 
+        let userDataFromDB = await $.get(`/userStats`)
+        let pieDiagramHtml = $('#userPie')
+        console.log(userDataFromDB);
+        let pushToChart = {
+            labels: [
+                "abroad",
+                "exposed",
+                "healthy",
+                "sick",
+                "symptoms"
+            ],
+            datasets: [
+                {
+                    data: [
+                        userDataFromDB.abroad, 
+                        userDataFromDB.exposed, 
+                        userDataFromDB.healthy, 
+                        userDataFromDB.sick, 
+                        userDataFromDB.symptoms
+                    ],
+                    backgroundColor: [
+                        "#7E349D",
+                        "#07ABA0",
+                        "#E3724B",
+                        "#F1C40F",
+                        "#61afef"
+                    ]
+                }]
+        };
+        const pieChart = new Chart(pieDiagramHtml, {
+          type: 'pie',
+          data: pushToChart
+        });
     }
-
-    
 }
 

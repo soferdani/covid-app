@@ -50,6 +50,7 @@ $('#stats').on('click',async function () {
     await module.getCountryStats()
     display.renderStats(module.worldStats)
     module.createCarthForCharPage()
+    module.getUsersInfoFromDB()
 })
 
 $('#news-bar').on('click', function () {

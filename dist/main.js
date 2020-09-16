@@ -4,6 +4,7 @@ const module = new APIManager
 const loadPage = async function(){
     display.renderHome()
     const countryName = await module.getCurrentCountry()
+    module.countryName = countryName
     await module.getStats(countryName, '', '')
     module.createChart()
 }
@@ -18,6 +19,7 @@ $('#menu-bar').on('click', '#delete-menu', function () {
 
 $('#search-button').on('click', async function () {
     const countryName = $('#country-input').val()
+    module.countryName = countryName
     await module.getStats(countryName, '', '')
     module.createChart()
     $('#country-input').val('')
@@ -35,9 +37,9 @@ $('#covid-calculator').on('click', function () {
 $('#page-content').on('click', '.answer', function () {
     const text = $(this).text()
     const next = module.calculaturQue(text)
-    display.renderChat(text, true)
+    display.renderChat(text, "user-msg")
     setTimeout(function(){ 
-        display.renderChat(next[0], false)
+        display.renderChat(next[0], 'domain-msg')
         if (next[0] === 'Please submit your info for answers') {
             display.renderUserForm()
         } else {
@@ -59,8 +61,12 @@ $('#page-content').on('click', '.submit-user', function () {
     display.renderThankyou()
 })
 
+$( "#page-content" ).change('#start', async function() {
+    const date = $('#start option:selected').text()
+    console.log(this.countryName);
+    await module.getStats(this.countryName, date, '')
+    module.createChart()
+
+  });
+
 loadPage()
-
-
-
-

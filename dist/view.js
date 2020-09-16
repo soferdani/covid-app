@@ -11,6 +11,7 @@ class Renderer {
         const template = Handlebars.compile(source)
         const newHTML = template()
         $('#page-content').empty().append(newHTML)
+        this.addOption()
     }
 
     renderMenu(){
@@ -36,12 +37,8 @@ class Renderer {
         $('#page-content').empty().append(newHTML)
     }
 
-    renderChat(text, bool){
-        if(bool){
-            $('#chat').append(`<p class="chat-msg" id="user-msg">${text}</p><br/><br/>`)
-        }else{
-            $('#chat').append(`<p class="chat-msg" id="domain-msg">${text}</p><br/><br/>`)
-        }
+    renderChat(text, id){
+        $('#chat').append(`<p class="chat-msg" id=${id}>${text}</p><br/><br/>`)
     }
 
     renderQue(res1, res2){
@@ -66,5 +63,11 @@ class Renderer {
     renderThankyou(){
         $('#page-content').empty().append('<div id="msg">Thank you the results will arrive soon</div>')
     }
-
+    
+    addOption(){
+        for(let i = Date.now() - 9000000000; i <= Date.now(); i+= 86500000){
+        $('#start').append(`<option value="${i}">${moment(i).format('L')}</option>`)
+        $('#end').append(`<option value="${i}">${moment(i).format('L')}</option>`)
+        }
+    }
 }

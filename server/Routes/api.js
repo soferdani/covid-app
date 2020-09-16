@@ -9,7 +9,6 @@ const nodemailer = require("nodemailer");
 const { getMaxListeners } = require('../model/User')
 
 
-// console.log(moment(Date.now()-3000000000));
 
 router.get("/stats/:country" ,async (req, res) => {
     const {country} = req.params

@@ -1,7 +1,7 @@
 const display = new Renderer
 const module = new APIManager
 
-const loadPage = async function(){
+const loadPage = async function () {
     display.renderPage('home')
     display.addOption()
     const countryName = await module.getCurrentCountry()
@@ -24,14 +24,14 @@ $('#search-button').on('click', async function () {
     const countryName = $('#country-input').val()
     $('#country-input').val('')
     module.countryName = countryName
-    try{
+    try {
         await module.getStats(countryName, '', '')
         module.createChart()
     }
     catch{
         display.renderEror()
     }
-    
+
 })
 
 $('#home').on('click', function () {
@@ -44,7 +44,7 @@ $('#covid-chat').on('click', function () {
     display.renderPage('calculatur')
 })
 
-$('#stats').on('click',async function () {
+$('#stats').on('click', async function () {
     display.renderPage('stats')
     await module.getWorldStats()
     await module.getCountryStats()
@@ -66,7 +66,7 @@ $('#page-content').on('click', '.answer', function () {
     const text = $(this).text()
     const next = module.calculaturQue(text)
     display.renderChat(text, "user-msg")
-    setTimeout(function(){ 
+    setTimeout(function () {
         display.renderChat(next[0], 'domain-msg')
         if (next[0] === 'We got results! Please submit your info for answers') {
             display.renderUserForm(false)
@@ -89,7 +89,7 @@ $('#page-content').on('click', '.submit-user', function () {
     display.renderThankyou()
 })
 
-$( "#page-content" ).change('#start', async function() {
+$("#page-content").change('#start', async function () {
 
 
     let from = $('#start option:selected').text()
@@ -99,7 +99,7 @@ $( "#page-content" ).change('#start', async function() {
     await module.getStats(module.countryName, from, to)
 
     module.createChart()
-  });
+});
 
 loadPage()
 

@@ -10,42 +10,42 @@ const { getMaxListeners } = require('../model/User')
 
 
 
-router.get("/stats/:country" ,async (req, res) => {
-    const {country} = req.params
-    const { from , to }  = req.query
-    try{
+router.get("/stats/:country", async (req, res) => {
+    const { country } = req.params
+    const { from, to } = req.query
+    try {
         const response = await axios.get(`https://api.covid19api.com/country/${country}?from=${from}&to=${to}`);
         let dataToTheUser = (response.data)
         const newDataArrDate = dataToTheUser.map(c => c.Date)
         const newDataArrDeth = dataToTheUser.map(c => c.Deaths)
         const newDataArrInfected = dataToTheUser.map(c => c.Active)
-        res.send([newDataArrDate,newDataArrDeth,newDataArrInfected])
+        res.send([newDataArrDate, newDataArrDeth, newDataArrInfected])
     } catch (err) {
         res.send(err)
     }
 })
 
-router.post("/saveUser", async (req,res) => {
-    try{
+router.post("/saveUser", async (req, res) => {
+    try {
         let UserToSaveInDB = req.body
-        toSave = new User (UserToSaveInDB)
+        toSave = new User(UserToSaveInDB)
         toSave.save()
-        res.send (toSave)
+        res.send(toSave)
     } catch (err) {
         res.send(err)
     }
-})  
+})
 
-router.get('/getUsers', async (req,res)=> {
-    try{
+router.get('/getUsers', async (req, res) => {
+    try {
         let toSend = await User.find({})
         res.send(toSend)
-    } catch(err) {
+    } catch (err) {
         res.send(err)
     }
 })
 
-router.post('/sendMail', async (req,res) => {
+router.post('/sendMail', async (req, res) => {
     let mailInfo = req.body
     let msgToUser = await msg.find({})
     // console.log( msgToUser[0][mailInfo.status])
@@ -53,83 +53,84 @@ router.post('/sendMail', async (req,res) => {
     ${msgToUser[0][mailInfo.status]}`
     try {
         let transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.EMAIL,
-          pass: process.env.PASSWORD
-        },
-      })   
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD
+            },
+        })
 
         let info = await transporter.sendMail({
-        from: '"Covid 19 Web-Cheat" <Covid19@covidbot.com>', // sender address
-        to: mailInfo.email, 
-        subject: "This is your Covid summery", 
-        text: theText, 
-        html: `<b>${theText}</b>`, 
-      });
+            from: '"Covid 19 Web-Cheat" <Covid19@covidbot.com>', // sender address
+            to: mailInfo.email,
+            subject: "This is your Covid summery",
+            text: theText,
+            html: `<b>${theText}</b>`,
+        });
 
-      res.send("complit the mission")
+        res.send("complit the mission")
     } catch (err) {
         res.send(err)
     }
-    
+
 })
 
-router.get("/infoForCharts1" ,async (req, res) => {
-    try{
+router.get("/infoForCharts1", async (req, res) => {
+    try {
         const response = await axios.get(`https://api.covid19api.com/world/total`);
         let dataToTheUser = (response.data)
         let TotalConfirmed = new Intl.NumberFormat().format(dataToTheUser.TotalConfirmed)
         let TotalDeaths = new Intl.NumberFormat().format(dataToTheUser.TotalDeaths)
         let TotalRecovered = new Intl.NumberFormat().format(dataToTheUser.TotalRecovered)
 
-        res.send({TotalConfirmed,TotalDeaths,TotalRecovered})
+        res.send({ TotalConfirmed, TotalDeaths, TotalRecovered })
     } catch (err) {
         res.send(err)
     }
 })
 
-router.get("/infoForCharts2" ,async (req, res) => {
-    const countrys = ['russia','south-africa','india ','brazil','spain']
+router.get("/infoForCharts2", async (req, res) => {
+    const countrys = ['russia', 'south-africa', 'india ', 'brazil', 'spain']
     let promises = []
     countrys.forEach(c => promises.push(axios.get(`https://api.covid19api.com/total/country/${c}`)))
-    let values = Promise.all(promises).then (function (responsFromApi){
-        let relevantInfo = responsFromApi.map (d => d.data)
+    let values = Promise.all(promises).then(function (responsFromApi) {
+        let relevantInfo = responsFromApi.map(d => d.data)
             .map(d => d[d.length - 1])
-            .map(d => {return {name: d.Country, active: d.Active}})
+            .map(d => { return { name: d.Country, active: d.Active } })
         res.send(relevantInfo)
     })
 })
 
 
-router.get("/news" ,async (req, res) => {
+router.get("/news", async (req, res) => {
     const url = 'http://newsapi.org/v2/everything?' +
-          'q=Covid&' +
-          'from=' +
-          moment().subtract(6, 'days').format('L') +
-          '&sortBy=popularity&' +
-          'apiKey=c9aa54cdd12c4fc8b1faae11fffdfbed';
+        'q=Covid&' +
+        'from=' +
+        moment().subtract(6, 'days').format('L') +
+        '&sortBy=popularity&' +
+        'apiKey=c9aa54cdd12c4fc8b1faae11fffdfbed';
     let news = await axios.get(url)
     news = news.data.articles
-    .map(a => {
-        return {
-            title: a.title, 
-            author: a.author,
-            description: a.description,
-            url: a.url,
-            urlToImage: a.urlToImage
-        }})
+        .map(a => {
+            return {
+                title: a.title,
+                author: a.author,
+                description: a.description,
+                url: a.url,
+                urlToImage: a.urlToImage
+            }
+        })
     res.send(news)
 })
 
 
-router.get("/userStats" ,async (req, res) => {
-    const symptoms = ["symptoms","healthy","abroad","exposed","sick"]
+router.get("/userStats", async (req, res) => {
+    const symptoms = ["symptoms", "healthy", "abroad", "exposed", "sick"]
     let promises = []
-    symptoms.forEach(s => promises.push(User.find({status: s}).count()))
-    Promise.all(promises).then(function (resFromDB){
+    symptoms.forEach(s => promises.push(User.find({ status: s }).count()))
+    Promise.all(promises).then(function (resFromDB) {
         let toSend = {}
-        for (i in symptoms){
+        for (i in symptoms) {
             toSend[symptoms[i]] = resFromDB[i]
         }
         res.send(toSend)

@@ -47,8 +47,9 @@ $('#covid-chat').on('click', function () {
 $('#stats').on('click',async function () {
     display.renderPage('stats')
     await module.getWorldStats()
+    await module.getCountryStats()
     display.renderStats(module.worldStats)
-    
+    module.createCarthForCharPage()
 })
 
 $('#news-bar').on('click', function () {

@@ -19,8 +19,14 @@ class APIManager {
         this.worldStats = await $.get(`/infoForCharts1`)
     }
 
+
     async getNews(){
         this.news = await $.get(`/news`)
+    }
+  
+    async getCountryStats(){
+        this.CountryStats = await $.get(`/infoForCharts2`)
+
     }
 
     calculaturQue(text){
@@ -82,7 +88,6 @@ class APIManager {
         
         let myChart = new Chart(ctx, {
             type: 'line',
-        
             data: {
                 labels: prettyDates,
                 datasets: [{
@@ -106,7 +111,48 @@ class APIManager {
 
 
     createCarthForCharPage () {
-        
+        let info = this.CountryStats
+        let activeArry = info.map(a => a.active)
+        let countryArry = info.map(a => a.name)
+
+        const diagramHtml = $('#diagram')
+        let barCharts = new Chart (diagramHtml, {
+            type: "bar",
+            data: {
+                labels: countryArry,
+                datasets: [{
+                    label: 'Active Patients',
+                    data: activeArry,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
+
     }
 
     async getLocation() {

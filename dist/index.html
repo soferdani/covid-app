@@ -47,7 +47,7 @@
                 <select class="first" name="date_of_end:date" tsabindex="7" id="end">
                 </select>     
             </label>
-            <canvas id="myChart" width="400" height="400"></canvas>
+            <div id="chart-template"><canvas id="myChart" width="400" height="400"></canvas></div>
             <div id="news">news</div>
         </div>
     </script>
@@ -85,9 +85,10 @@
     </script>
 
     <script id="world-stats-template" type="text/x-handlebars-template">
-        <div>Total active: {{this.TotalConfirmed}}</div>
-        <div>Total death cases: {{this.TotalDeaths}}</div>
-        <div>Total recovered: {{this.TotalRecovered}}</div>
+        <div class="stat">Global Stats</div>
+        <div class="stat">Total active <br><br> {{this.TotalConfirmed}}</div><br>
+        <div class="stat">Total death cases <br><br> {{this.TotalDeaths}}</div><br>
+        <div class="stat">Total recovered <br><br> {{this.TotalRecovered}}</div><br>
     </script>
 
     <script id="about-template" type="text/x-handlebars-template">

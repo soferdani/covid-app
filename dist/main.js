@@ -44,16 +44,13 @@ $('#covid-chat').on('click', function () {
 
 $('#stats').on('click',async function () {
     display.renderPage('stats')
-    //await module.getWorldStats()
-    display.renderStats({TotalConfirmed: 20394, TotalDeaths:2034, TotalRecovered:90236})
-    //module.worldStats
+    await module.getWorldStats()
+    display.renderStats(module.worldStats)
+    
 })
 
 $('#about').on('click', function () {
     display.renderPage('about')
-    //await module.getWorldStats()
-    display.renderStats({TotalConfirmed: 20394, TotalDeaths:2034, TotalRecovered:90236})
-    //module.worldStats
 })
 
 $('#page-content').on('click', '.answer', function () {

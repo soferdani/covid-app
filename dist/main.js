@@ -4,6 +4,7 @@ const module = new APIManager
 const loadPage = async function(){
     display.renderHome()
     const countryName = await module.getCurrentCountry()
+    module.countryName = countryName
     await module.getStats(countryName, '', '')
     module.createChart()
 }
@@ -18,6 +19,7 @@ $('#menu-bar').on('click', '#delete-menu', function () {
 
 $('#search-button').on('click', async function () {
     const countryName = $('#country-input').val()
+    module.countryName = countryName
     await module.getStats(countryName, '', '')
     module.createChart()
     $('#country-input').val('')
@@ -59,8 +61,12 @@ $('#page-content').on('click', '.submit-user', function () {
     display.renderThankyou()
 })
 
+$( "#page-content" ).change('#start', async function() {
+    const date = $('#start option:selected').text()
+    console.log(this.countryName);
+    await module.getStats(this.countryName, date, '')
+    module.createChart()
+
+  });
+
 loadPage()
-
-
-
-

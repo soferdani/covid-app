@@ -2,6 +2,7 @@ class APIManager {
     constructor(){
         this.data = []
         this.status = ''
+        this.countryName = ''
     }
 
     async getStats(countryName, from, to){
@@ -28,7 +29,7 @@ class APIManager {
             return ['where?', 'Close space','Open space']
         }
         if(text === 'Less than 15 minutes'){
-            this.status = ""
+            this.status = "healthy"
             return ['Please submit your info for answers', '', '']
         }
         if(text === 'Close space'){
@@ -36,7 +37,7 @@ class APIManager {
             return ['Please submit your info and date of exposer for answers', '', '']
         }
         if(text === 'Open space'){
-            this.status = ""
+            this.status = "healthy"
             return ['Please submit your info for answers', '', '']
         }
 
@@ -48,7 +49,7 @@ class APIManager {
             return ['Please submit your info for answers', '', '']
         }
         if(text === 'Less than 38 degrees'){
-            this.status = ""
+            this.status = "healthy"
             return ['Please submit your info for answers', '', '']
         }
 

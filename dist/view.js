@@ -11,6 +11,7 @@ class Renderer {
         const template = Handlebars.compile(source)
         const newHTML = template()
         $('#page-content').empty().append(newHTML)
+        this.addOption()
     }
 
     renderMenu(){
@@ -62,5 +63,11 @@ class Renderer {
     renderThankyou(){
         $('#page-content').empty().append('<div id="msg">Thank you the results will arrive soon</div>')
     }
-
+    
+    addOption(){
+        for(let i = Date.now() - 9000000000; i <= Date.now(); i+= 86500000){
+        $('#start').append(`<option value="${i}">${moment(i).format('L')}</option>`)
+        $('#end').append(`<option value="${i}">${moment(i).format('L')}</option>`)
+        }
+    }
 }

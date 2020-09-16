@@ -38,6 +38,17 @@
 
     <script id="home-template" type="text/x-handlebars-template">
         <div id="home">
+            
+            <label id="Start-date">From<br />
+                <select class="first" name="date_of_start:date" tsabindex="7" id="start">
+                    <option value="">--date--</option>
+                </select>     
+            </label>
+            <label id="end-date">To<br />
+                <select class="first" name="date_of_end:date" tsabindex="7" id="end">
+                    <option value="">--date--</option>
+                </select>     
+            </label>
             <canvas id="myChart" width="400" height="400"></canvas>
             <div id="news">news</div>
         </div>
@@ -76,7 +87,8 @@
         </div>
     </script>
 
-    <script src="/moment/dist/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <!-- <script src="/moment/dist/moment.js"></script> -->
     <script src="/chart.js/dist/Chart.js"></script>
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/handlebars/dist/handlebars.js"></script>

@@ -7,8 +7,6 @@
     left: 0;
     height: 100vh;
     width: 100vw; */
-    
-
 }
 
 body {
@@ -17,7 +15,7 @@ body {
 
 #nav-bar{
     display: grid;
-    grid-template-columns: 2fr 1fr 2fr 1fr;
+    grid-template-columns: 2fr 1fr 2fr 1fr 1fr;
     background-color: #f5f6fa;
     border-bottom: 1px black solid;
     position: sticky;
@@ -30,7 +28,7 @@ body {
 }
 #menu-option {
     position: absolute;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     justify-items: center;
     align-items: center;
     background-color: #f9f9f9;
@@ -44,9 +42,10 @@ body {
     display: grid;
     justify-items: center;
     align-items: center;
-      width: 100%;
-      height: 100%;
+    width: 100%;
+    height: 100%;
     border-bottom: 1px #dfe4ea solid; 
+    cursor: pointer;
   }
 
   #calculatur{
@@ -79,13 +78,11 @@ body {
 	position:relative;
 	top:1px;
 }
-  #msg{
-      color: green;
-  }
   .chat-msg{
-      border-radius: 4px;
-      display: inline-block;
-      position: absolute;
+    border:1px solid black;
+    border-radius: 4px;
+    display: inline-block;
+    position: absolute;
       
   }
     #user-msg{
@@ -166,7 +163,19 @@ label{
 }
 
 .stat{
-    font-size: 7vw;
+    font-size: 5vw;
+    background-color: #f7f1e3;
+    border: 3px white solid;
+    border-radius: 5px;
+    width: 100%;
+    padding: 1.5vw;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+#global-stat{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 img{
     width: 100%;
@@ -192,4 +201,8 @@ img{
     display: grid;
     justify-content: center;
     align-content: center;
+  }
+
+  #end-date{
+      right: 0%;
   }

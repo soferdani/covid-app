@@ -79,9 +79,9 @@ router.get("/infoForCharts1" ,async (req, res) => {
     try{
         const response = await axios.get(`https://api.covid19api.com/world/total`);
         let dataToTheUser = (response.data)
-        let TotalConfirmed = dataToTheUser.TotalConfirmed
-        let TotalDeaths = dataToTheUser.TotalDeaths
-        let TotalRecovered = dataToTheUser.TotalRecovered
+        let TotalConfirmed = new Intl.NumberFormat().format(dataToTheUser.TotalConfirmed)
+        let TotalDeaths = new Intl.NumberFormat().format(dataToTheUser.TotalDeaths)
+        let TotalRecovered = new Intl.NumberFormat().format(dataToTheUser.TotalRecovered)
 
         res.send({TotalConfirmed,TotalDeaths,TotalRecovered})
     } catch (err) {

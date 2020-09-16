@@ -100,6 +100,11 @@ class APIManager {
         });
     }
 
+
+    createCarthForCharPage () {
+        
+    }
+
     async getLocation() {
         return new Promise((resolve, reject) => {
             if (navigator.geolocation) {
@@ -123,9 +128,5 @@ class APIManager {
     }
 
     
-    // async sendMail(){
-    //     const res = await $.post('/sendMail', {name, email, date, status})
-    //     console.log(res);
-    // }
 }
 

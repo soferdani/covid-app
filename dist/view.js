@@ -65,9 +65,10 @@ class Renderer {
     }
     
     addOption(){
-        for(let i = Date.now() - 9000000000; i <= Date.now(); i+= 86500000){
+        for(let i = new Date('01/22/2020').getTime(); i <= Date.now(); i+= 86500000){
         $('#start').append(`<option value="${i}">${moment(i).format('L')}</option>`)
-        $('#end').append(`<option value="${i}">${moment(i).format('L')}</option>`)
+        $('#end').append(`<option value="${i}" selected="selected">${moment(i).format('L')}</option>`)
         }
     }
+
 }

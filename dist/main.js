@@ -62,11 +62,12 @@ $('#page-content').on('click', '.submit-user', function () {
 })
 
 $( "#page-content" ).change('#start', async function() {
-    const date = $('#start option:selected').text()
-    console.log(this.countryName);
-    await module.getStats(this.countryName, date, '')
+    let from = $('#start option:selected').text()
+    let to = $('#end option:selected').text()
+    from = new Date(from).toISOString().substring(0, 10)
+    to = new Date(to).toISOString().substring(0, 10)
+    await module.getStats(module.countryName, from, to)
     module.createChart()
-
   });
 
 loadPage()

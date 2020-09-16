@@ -16,8 +16,9 @@ class APIManager {
     }
 
     async saveUser(name, email, date, status){
-        const res = await $.post('/saveUser', {name, email, date, status})
-        console.log(res);
+        let dataToRouts = {name, email, date, status}
+        const res = await $.post('/saveUser', dataToRouts)
+        const sendTheMail = await $.post('/sendMail',dataToRouts)
     }
 
     calculaturQue(text){

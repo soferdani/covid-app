@@ -7,7 +7,7 @@ const moment = require('moment')
 
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/User', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/User', { useNewUrlParser: true, useUnifiedTopology: true })
 
 
 app.use(bodyParser.urlencoded({ extended: false }))

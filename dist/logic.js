@@ -175,7 +175,6 @@ class APIManager {
     async getUsersInfoFromDB () { 
         let userDataFromDB = await $.get(`/userStats`)
         let pieDiagramHtml = $('#userPie')
-        console.log(userDataFromDB);
         let pushToChart = {
             labels: [
                 "abroad",

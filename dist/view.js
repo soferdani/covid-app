@@ -55,10 +55,6 @@ class Renderer {
     }
 
     renderStats(worldstats){
-        // const {TotalConfirmed} = this.worldStats
-        // const {TotalDeaths} = this.worldStats
-        // const {TotalRecovered} = this.worldStats
-        // const total = TotalRecovered + TotalDeaths + TotalConfirmed
         const source = $(`#world-stats-template`).html()
         const template = Handlebars.compile(source)
         const newHTML = template(worldstats)

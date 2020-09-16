@@ -1,11 +1,12 @@
 const express = require('express')
+require('dotenv').config()
 const axios = require('axios')
 const moment = require('moment')
 const router = express.Router()
 const User = require('../model/User')
 const nodemailer = require("nodemailer");
 const { getMaxListeners } = require('../model/User')
-const pass = "NOTWORKING!!!"
+
 
 // console.log(moment(Date.now()-3000000000));
 
@@ -49,25 +50,30 @@ router.get('/getUsers', async (req,res)=> {
 })
 
 router.post('/sendMail', async (req,res) => {
+    
+    let mailInfo = req.body
+    console.log(mailInfo);
+    console.log(mailInfo.email);
+    console.log(mailInfo.status);
+    // console.log(mailInfo);
+
     try {
         let transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "escapeadvaisory@gmail.com",
-          pass: pass
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD
         },
-      });   
+      })   
 
         let info = await transporter.sendMail({
         from: '"Covid 19 Web-Cheat" <Covid19@covidbot.com>', // sender address
-        to: "soferdani@gmail.com, yuvalotem@gmail.com", 
-        subject: "Hello ✔", 
+        to: mailInfo.email, 
+        subject: "", 
         text: "Hello world?", 
         html: "<b>Hello world?</b>", 
       });
 
-      console.log("Message sent: %s", info.messageId);
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
       res.send("complit the mission")
     } catch (err) {
         res.send(err)

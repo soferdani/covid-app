@@ -93,23 +93,12 @@ router.get("/infoForCharts2" ,async (req, res) => {
     const countrys = ['russia','usa','australia','brazil','china']
     let promises = []
     countrys.forEach(c => promises.push(axios.get(`https://api.covid19api.com/total/country/${c}`)))
-    // let values = await Promise.all(promises)
-    res.send(promises)
-   
+    let values = Promise.all(promises).then (function (responsFromApi){
+        let relevantInfo = responsFromApi.map (d => d.data)
+            .map(d => d[d.length - 1])
+            .map(d => {return {name: d.Country, number: d.Active}})
+        res.send(relevantInfo)
+    })
 })
-
-
-
-
-
-
- // try{
-    //     const response = await axios.get(`https://api.covid19api.com/total/country/russia`);
-    //     let active = response.data[response.data.length - 1].Active
-    //     active = active.toString()
-    //     res.send()
-    // } catch (err) {
-    //     res.send(err)
-    // }
 
 module.exports = router

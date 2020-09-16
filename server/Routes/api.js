@@ -25,8 +25,6 @@ router.get("/stats/:country" ,async (req, res) => {
     }
 })
 
-
-
 router.post("/saveUser", async (req,res) => {
     try{
         let UserToSaveInDB = req.body
@@ -38,9 +36,6 @@ router.post("/saveUser", async (req,res) => {
     }
 })  
 
-
-
-
 router.get('/getUsers', async (req,res)=> {
     try{
         let toSend = await User.find({})
@@ -49,8 +44,6 @@ router.get('/getUsers', async (req,res)=> {
         res.send(err)
     }
 })
-
-
 
 router.post('/sendMail', async (req,res) => {
     let mailInfo = req.body
@@ -72,7 +65,7 @@ router.post('/sendMail', async (req,res) => {
         to: mailInfo.email, 
         subject: "This is your Covid summery", 
         text: theText, 
-        html: `<b>${msgToUser[0][mailInfo.status]}</b>`, 
+        html: `<b>${theText}</b>`, 
       });
 
       res.send("complit the mission")
@@ -81,8 +74,42 @@ router.post('/sendMail', async (req,res) => {
     }
     
 })
-//todo - 1. connect the database to the email sendler
-//todo - 2. create templete massege in the database
-//todo - 3. 
+
+router.get("/infoForCharts1" ,async (req, res) => {
+    try{
+        const response = await axios.get(`https://api.covid19api.com/world/total`);
+        let dataToTheUser = (response.data)
+        let TotalConfirmed = dataToTheUser.TotalConfirmed
+        let TotalDeaths = dataToTheUser.TotalDeaths
+        let TotalRecovered = dataToTheUser.TotalRecovered
+
+        res.send({TotalConfirmed,TotalDeaths,TotalRecovered})
+    } catch (err) {
+        res.send(err)
+    }
+})
+
+router.get("/infoForCharts2" ,async (req, res) => {
+    const countrys = ['russia','usa','australia','brazil','china']
+    let promises = []
+    countrys.forEach(c => promises.push(axios.get(`https://api.covid19api.com/total/country/${c}`)))
+    // let values = await Promise.all(promises)
+    res.send(promises)
+   
+})
+
+
+
+
+
+
+ // try{
+    //     const response = await axios.get(`https://api.covid19api.com/total/country/russia`);
+    //     let active = response.data[response.data.length - 1].Active
+    //     active = active.toString()
+    //     res.send()
+    // } catch (err) {
+    //     res.send(err)
+    // }
 
 module.exports = router

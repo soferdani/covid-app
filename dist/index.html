@@ -17,18 +17,16 @@
             <p>Covid-Center</p>
             <i class="fas fa-crown"></i>
             <p><input id="country-input" placeholder="Country"></p>
-            <p>
-                <span id="search-button"><i class="fas fa-search"></i></span>
-                <span id="menu-bar"><span id="menu-button"><i class="fas fa-bars"></i></span></span>
-            </p>
+            <span id="search-button"><i class="fas fa-search"></i></span>
+            <span id="menu-bar"><span id="menu-button"><i class="fas fa-bars"></i></span></span>
         </div>
 
         <div id="menu-option">
-            <div class="menu-select" id="home">Home</div>
-            <div class="menu-select" id="covid-chat">Corona Chat</div>
-            <div class="menu-select" id="stats" >Stats</div>
-            <div class="menu-select" id="news-bar">News</div>
-            <div class="menu-select" id="about">About Us</div>
+            <div class="menu-select" id="home"><i class="fas fa-home"></i> Home</div>
+            <div class="menu-select" id="covid-chat"><i class="fas fa-comments"></i> Corona Chat</div>
+            <div class="menu-select" id="stats"><i class="fas fa-chart-pie"></i> Stats</div>
+            <div class="menu-select" id="news-bar"><i class="fas fa-newspaper"></i> News</div>
+            <div class="menu-select" id="about"><i class="fas fa-handshake"></i> About Us</div>
         </div>
 
         <div id="page-content">
@@ -41,15 +39,18 @@
             <div id="push-news">news</div>
             <p id="news"></p>
             
+            <div id="chart-template"><canvas id="myChart" width="400" height="400"></canvas></div>
+            
             <label id="Start-date">From<br />
                 <select class="first" name="date_of_start:date" tsabindex="7" id="start">
                 </select>     
             </label>
+
             <label id="end-date">To<br />
                 <select class="first" name="date_of_end:date" tsabindex="7" id="end">
                 </select>     
             </label>
-            <div id="chart-template"><canvas id="myChart" width="400" height="400"></canvas></div>
+
     </script>
 
 
@@ -80,16 +81,18 @@
     </script>
 
     <script id="stats-template" type="text/x-handlebars-template">
-        <div id="world-stats"></div>
         <div id="countries-stats"><canvas id="diagram" width="400" height="400"></canvas></div>
         <div id="user-stats"><canvas id="userPie" width="400" height="400"></canvas></div>
+        <div id="world-stats"></div>
     </script>
 
     <script id="world-stats-template" type="text/x-handlebars-template">
-        <div class="stat">Global Stats</div>
-        <div class="stat">Total active <br><br> {{this.TotalConfirmed}}</div><br>
-        <div class="stat">Total death cases <br><br> {{this.TotalDeaths}}</div><br>
-        <div class="stat">Total recovered <br><br> {{this.TotalRecovered}}</div><br>
+        <div id="global-stat">
+            <div class="stat">Global Stats</div>
+            <div class="stat">Total active <br/> {{this.TotalConfirmed}}</div>
+            <div class="stat">Total death cases <br/> {{this.TotalDeaths}}</div>
+            <div class="stat">Total recovered <br/> {{this.TotalRecovered}}</div>
+        </div>
     </script>
 
     <script id="about-template" type="text/x-handlebars-template">

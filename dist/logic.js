@@ -1,91 +1,91 @@
 class APIManager {
-    constructor(){
+    constructor() {
         this.data = []
         this.status = ''
         this.countryName = ''
     }
 
-    async getStats(countryName, from, to){
+    async getStats(countryName, from, to) {
         this.data = await $.get(`/stats/${countryName}?from=${from}&to=${to}`)
     }
 
-    async saveUser(name, email, date, status){
-        let dataToRouts = {name, email, date, status}
+    async saveUser(name, email, date, status) {
+        let dataToRouts = { name, email, date, status }
         const res = await $.post('/saveUser', dataToRouts)
-        const sendTheMail = await $.post('/sendMail',dataToRouts)
+        const sendTheMail = await $.post('/sendMail', dataToRouts)
     }
 
-    async getWorldStats(){
+    async getWorldStats() {
         this.worldStats = await $.get(`/infoForCharts1`)
     }
 
 
-    async getNews(){
+    async getNews() {
         this.news = await $.get(`/news`)
     }
-  
-    async getCountryStats(){
+
+    async getCountryStats() {
         this.CountryStats = await $.get(`/infoForCharts2`)
 
     }
 
-    calculaturQue(text){
-        if(text === 'I was exposed to a verified patient'){
-            return ['For how long?' , 'More than 15 minutes', 'Less than 15 minutes']
+    calculaturQue(text) {
+        if (text === 'I was exposed to a verified patient') {
+            return ['For how long?', 'More than 15 minutes', 'Less than 15 minutes']
         }
-        if(text === 'More than 15 minutes'){
-            return ['where?', 'Close space','Open space']
+        if (text === 'More than 15 minutes') {
+            return ['where?', 'Close space', 'Open space']
         }
-        if(text === 'Less than 15 minutes'){
+        if (text === 'Less than 15 minutes') {
             this.status = "healthy"
             return ['We got results! Please submit your info for answers', '', '']
         }
-        if(text === 'Close space'){
+        if (text === 'Close space') {
             this.status = "exposed"
             return ['We got results! Please submit your info and date of exposer for answers', '', '']
         }
-        if(text === 'Open space'){
+        if (text === 'Open space') {
             this.status = "healthy"
             return ['We got results! Please submit your info for answers', '', '']
         }
 
-        if(text === "I'm not feeling well"){
-            return ['Whats your temprature?' , 'More than 38 degrees', 'Less than 38 degrees']
+        if (text === "I'm not feeling well") {
+            return ['Whats your temprature?', 'More than 38 degrees', 'Less than 38 degrees']
         }
-        if(text === 'More than 38 degrees'){
+        if (text === 'More than 38 degrees') {
             this.status = "symptoms"
             return ['We got results! Please submit your info for answers', '', '']
         }
-        if(text === 'Less than 38 degrees'){
+        if (text === 'Less than 38 degrees') {
             this.status = "healthy"
             return ['We got results! Please submit your info for answers', '', '']
         }
 
-        if(text === "I returned from abroad"){
+        if (text === "I returned from abroad") {
             this.status = "abroad"
             return ['We got results! Please submit your info and date of exposer for answers', '', '']
         }
 
-        if(text === "I'm a verified corona patient"){
-            return ['Do you have symptoms?' , 'Yes', 'No']
+        if (text === "I'm a verified corona patient") {
+            return ['Do you have symptoms?', 'Yes', 'No']
         }
-        if(text === 'Yes'){
+        if (text === 'Yes') {
             this.status = "sick with symptoms"
             return ['We got results! Please submit your info for answers', '', '']
         }
-        if(text === 'No'){
+        if (text === 'No') {
             this.status = "sick with out symptoms"
             return ['We got results! Please submit your info for answers', '', '']
         }
 
     }
-    
 
-    createChart () {
+
+    createChart() {
         let ctx = $('#myChart')
         // ctx.clearRect()
         const prettyDates = this.data[0].map(d => moment(d).format('L'))
-        
+
         let myChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -96,7 +96,7 @@ class APIManager {
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
                     data: this.data[1]
-                },{
+                }, {
                     label: 'Active',
                     fill: false,
                     backgroundColor: 'rgb(25, 181, 254)',
@@ -110,13 +110,13 @@ class APIManager {
     }
 
 
-    createCarthForCharPage () {
+    createCarthForCharPage() {
         let info = this.CountryStats
         let activeArry = info.map(a => a.active)
         let countryArry = info.map(a => a.name)
 
         const diagramHtml = $('#diagram')
-        let barCharts = new Chart (diagramHtml, {
+        let barCharts = new Chart(diagramHtml, {
             type: "bar",
             data: {
                 labels: countryArry,
@@ -167,12 +167,12 @@ class APIManager {
         const position = await this.getLocation()
         const lat = position.coords.latitude
         const long = position.coords.longitude
-           const data = await $.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyBpiTf5uzEtJsKXReoOKXYw4RO0ayT2Opc`)
-           return data.results[data.results.length - 1].address_components[0].short_name
-           
+        const data = await $.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyBpiTf5uzEtJsKXReoOKXYw4RO0ayT2Opc`)
+        return data.results[data.results.length - 1].address_components[0].short_name
+
     }
-    
-    async getUsersInfoFromDB () { 
+
+    async getUsersInfoFromDB() {
         let userDataFromDB = await $.get(`/userStats`)
         let pieDiagramHtml = $('#userPie')
         let pushToChart = {
@@ -186,10 +186,10 @@ class APIManager {
             datasets: [
                 {
                     data: [
-                        userDataFromDB.abroad, 
-                        userDataFromDB.exposed, 
-                        userDataFromDB.healthy, 
-                        userDataFromDB.sick, 
+                        userDataFromDB.abroad,
+                        userDataFromDB.exposed,
+                        userDataFromDB.healthy,
+                        userDataFromDB.sick,
                         userDataFromDB.symptoms
                     ],
                     backgroundColor: [
@@ -202,8 +202,8 @@ class APIManager {
                 }]
         };
         const pieChart = new Chart(pieDiagramHtml, {
-          type: 'pie',
-          data: pushToChart
+            type: 'pie',
+            data: pushToChart
         });
     }
 }

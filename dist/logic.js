@@ -19,8 +19,14 @@ class APIManager {
         this.worldStats = await $.get(`/infoForCharts1`)
     }
 
+
+    async getNews(){
+        this.news = await $.get(`/news`)
+    }
+  
     async getCountryStats(){
         this.CountryStats = await $.get(`/infoForCharts2`)
+
     }
 
     calculaturQue(text){
@@ -77,6 +83,7 @@ class APIManager {
 
     createChart () {
         let ctx = $('#myChart')
+        // ctx.clearRect()
         const prettyDates = this.data[0].map(d => moment(d).format('L'))
         
         let myChart = new Chart(ctx, {

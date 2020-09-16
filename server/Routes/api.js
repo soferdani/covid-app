@@ -101,6 +101,28 @@ router.get("/infoForCharts2" ,async (req, res) => {
     })
 })
 
+
+router.get("/news" ,async (req, res) => {
+    const url = 'http://newsapi.org/v2/everything?' +
+          'q=Covid&' +
+          'from=' +
+          moment().subtract(6, 'days').format('L') +
+          '&sortBy=popularity&' +
+          'apiKey=c9aa54cdd12c4fc8b1faae11fffdfbed';
+    let news = await axios.get(url)
+    news = news.data.articles
+    .map(a => {
+        return {
+            title: a.title, 
+            author: a.author,
+            description: a.description,
+            url: a.url,
+            urlToImage: a.urlToImage
+        }})
+    res.send(news)
+})
+
+
 router.get("/userStats" ,async (req, res) => {
     const symptoms = ["symptoms","healthy","abroad","exposed","sick"]
     let promises = []
@@ -113,6 +135,7 @@ router.get("/userStats" ,async (req, res) => {
         res.send(toSend)
     })
 })
+
 
 
 module.exports = router

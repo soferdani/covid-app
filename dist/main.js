@@ -8,6 +8,8 @@ const loadPage = async function(){
     module.countryName = countryName
     await module.getStats(countryName, '', '')
     module.createChart()
+    await module.getNews()
+    display.renderNews(module.news)
 }
 
 $('#menu-bar').on('click', '#menu-button', function () {
@@ -48,6 +50,11 @@ $('#stats').on('click',async function () {
     await module.getCountryStats()
     display.renderStats(module.worldStats)
     module.createCarthForCharPage()
+})
+
+$('#news-bar').on('click', function () {
+    module.news.splice(5)
+    display.renderNewsPage(module.news)
 })
 
 $('#about').on('click', function () {
@@ -94,3 +101,4 @@ $( "#page-content" ).change('#start', async function() {
   });
 
 loadPage()
+

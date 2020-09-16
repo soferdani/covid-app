@@ -63,7 +63,6 @@ $('#page-content').on('click', '.submit-user', function () {
 
 $( "#page-content" ).change('#start', async function() {
     const date = $('#start option:selected').text()
-    console.log(this.countryName);
     await module.getStats(this.countryName, date, '')
     module.createChart()
 

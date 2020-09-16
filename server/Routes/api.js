@@ -4,6 +4,7 @@ const axios = require('axios')
 const moment = require('moment')
 const router = express.Router()
 const User = require('../model/User')
+const msg = require('../model/msg')
 const nodemailer = require("nodemailer");
 const { getMaxListeners } = require('../model/User')
 
@@ -40,6 +41,7 @@ router.post("/saveUser", async (req,res) => {
 
 
 
+
 router.get('/getUsers', async (req,res)=> {
     try{
         let toSend = await User.find({})
@@ -49,14 +51,14 @@ router.get('/getUsers', async (req,res)=> {
     }
 })
 
-router.post('/sendMail', async (req,res) => {
-    
-    let mailInfo = req.body
-    console.log(mailInfo);
-    console.log(mailInfo.email);
-    console.log(mailInfo.status);
-    // console.log(mailInfo);
 
+
+router.post('/sendMail', async (req,res) => {
+    let mailInfo = req.body
+    let msgToUser = await msg.find({})
+    // console.log( msgToUser[0][mailInfo.status])
+    let theText = `Hello ${mailInfo.name} 
+    ${msgToUser[0][mailInfo.status]}`
     try {
         let transporter = nodemailer.createTransport({
         service: "gmail",
@@ -69,9 +71,9 @@ router.post('/sendMail', async (req,res) => {
         let info = await transporter.sendMail({
         from: '"Covid 19 Web-Cheat" <Covid19@covidbot.com>', // sender address
         to: mailInfo.email, 
-        subject: "", 
-        text: "Hello world?", 
-        html: "<b>Hello world?</b>", 
+        subject: "This is your Covid summery", 
+        text: theText, 
+        html: `<b>${msgToUser[0][mailInfo.status]}</b>`, 
       });
 
       res.send("complit the mission")

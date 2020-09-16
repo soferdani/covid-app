@@ -90,15 +90,29 @@ router.get("/infoForCharts1" ,async (req, res) => {
 })
 
 router.get("/infoForCharts2" ,async (req, res) => {
-    const countrys = ['russia','usa','australia','brazil','china']
+    const countrys = ['russia','south-africa','india ','brazil','spain']
     let promises = []
     countrys.forEach(c => promises.push(axios.get(`https://api.covid19api.com/total/country/${c}`)))
     let values = Promise.all(promises).then (function (responsFromApi){
         let relevantInfo = responsFromApi.map (d => d.data)
             .map(d => d[d.length - 1])
-            .map(d => {return {name: d.Country, number: d.Active}})
+            .map(d => {return {name: d.Country, active: d.Active}})
         res.send(relevantInfo)
     })
 })
+
+router.get("/userStats" ,async (req, res) => {
+    const symptoms = ["symptoms","healthy","abroad","exposed","sick"]
+    let promises = []
+    symptoms.forEach(s => promises.push(User.find({status: s}).count()))
+    Promise.all(promises).then(function (resFromDB){
+        let toSend = {}
+        for (i in symptoms){
+            toSend[symptoms[i]] = resFromDB[i]
+        }
+        res.send(toSend)
+    })
+})
+
 
 module.exports = router

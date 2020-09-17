@@ -29,7 +29,7 @@ router.post("/saveUser", async (req, res) => {
     try {
         let UserToSaveInDB = req.body
         toSave = new User(UserToSaveInDB)
-        toSave.save()
+        await toSave.save()
         res.send(toSave)
     } catch (err) {
         res.send(err)
@@ -136,6 +136,17 @@ router.get("/userStats", async (req, res) => {
     })
 })
 
+router.get("/location/:lat/:lon", async (req, res) => {
+    const { lat, lon } = req.params
+    try {
+        let response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=AIzaSyBpiTf5uzEtJsKXReoOKXYw4RO0ayT2Opc`)
+        response = (response.data)
+        response = response.results[response.results.length - 1].address_components[0].short_name
+        res.send(response)
+    } catch (err) {
+        res.send(err)
+    }
+})
 
 
 module.exports = router

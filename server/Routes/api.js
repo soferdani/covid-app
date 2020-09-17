@@ -48,7 +48,6 @@ router.get('/getUsers', async (req, res) => {
 router.post('/sendMail', async (req, res) => {
     let mailInfo = req.body
     let msgToUser = await msg.find({})
-    // console.log( msgToUser[0][mailInfo.status])
     let theText = `Hello ${mailInfo.name} 
     ${msgToUser[0][mailInfo.status]}`
     try {

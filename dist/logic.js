@@ -210,6 +210,7 @@ class APIManager {
         if(!name || !email){
             return false
         }
+        return true
     }
 }
 

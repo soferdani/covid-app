@@ -41,16 +41,14 @@
             <p class="news" id="news"></p>
             
             <div id="chart-template"><canvas id="myChart" width="400" height="400"></canvas></div>
-            
-            <label id="Start-date">From<br />
-                <select class="first" name="date_of_start:date" tsabindex="7" id="start">
-                </select>     
-            </label>
 
-            <label id="end-date">To<br />
-                <select class="first" name="date_of_end:date" tsabindex="7" id="end">
-                </select>     
-            </label>
+            <label id="Start-date">From
+                <input type="date" id="start">
+            </label>  
+
+            <label id="end-date">To  
+                <input type="date" id="end">
+            </label>  
 
     </script>
 
@@ -73,7 +71,7 @@
     <script id="userForm-template" type="text/x-handlebars-template">
         <div id="user-form">
             {{#if date}}
-            <input class="date-input" placeholder="Enter date" type="datetime">
+            <input class="date-input" type="date">
             {{/if}}
             <input class="name-input" placeholder="Enter your name">
             <input class="mail-input" placeholder="Enter your email">

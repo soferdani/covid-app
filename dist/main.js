@@ -3,7 +3,6 @@ const module = new APIManager
 
 const loadPage = async function () {
     display.renderPage('home')
-    display.addOption()
     const countryName = await module.getCurrentCountry()
     module.countryName = countryName
     await module.getStats(countryName, '', '')
@@ -26,6 +25,7 @@ $('#search-button').on('click', async function () {
     module.countryName = countryName
     try {
         await module.getStats(countryName, '', '')
+        display.createChartTemplate()
         module.createChart()
     }
     catch{
@@ -36,7 +36,6 @@ $('#search-button').on('click', async function () {
 
 $('#home').on('click', function () {
     display.renderPage('home')
-    display.addOption()
     loadPage()
 })
 
@@ -84,20 +83,21 @@ $('#page-content').on('click', '.submit-user', function () {
     const name = $(this).closest('div').find('.name-input').val()
     const email = $(this).closest('div').find('.mail-input').val()
     const date = $(this).closest('div').find('.date-input').val()
-    const status = module.status
-    module.saveUser(name, email, date, status)
-    display.renderThankyou()
+    if(module.checkValid(name, email)){
+        const status = module.status
+        module.saveUser(name, email, date, status)
+        display.renderThankyou()
+    }else{
+        alert("invalid input")
+    }
 })
 
 $("#page-content").change('#start', async function () {
-
-
-    let from = $('#start option:selected').text()
-    let to = $('#end option:selected').text()
-    from = new Date(from).toISOString().substring(0, 10)
-    to = new Date(to).toISOString().substring(0, 10)
+    let from = $('#start').val() || '01/22/2020'
+    let to = $('#end').val() || Date.now()
+    from = new Date(from).toISOString().substring(0, 10) 
+    to = new Date(to).toISOString().substring(0, 10) 
     await module.getStats(module.countryName, from, to)
-
     module.createChart()
 });
 

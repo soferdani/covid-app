@@ -118,10 +118,6 @@ label{
     border: 1px black solid;
     background-color: #2d3436;
     color: white;
-    width: 95%;
-    height: 25%;
-    position: fixed;
-    bottom: 0;
 }
 #user-form>input{
     text-align: center;

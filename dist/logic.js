@@ -83,7 +83,6 @@ class APIManager {
 
     createChart() {
         let ctx = $('#myChart')
-        // ctx.clearRect()
         const prettyDates = this.data[0].map(d => moment(d).format('L'))
 
         let myChart = new Chart(ctx, {
@@ -205,6 +204,13 @@ class APIManager {
             type: 'pie',
             data: pushToChart
         });
+    }
+
+    checkValid(name, email){
+        if(!name || !email){
+            return false
+        }
+        return true
     }
 }
 

@@ -44,15 +44,12 @@ class Renderer {
         $('#page-content').empty().append('<div id="msg">Thank you the results will arrive soon</div>')
     }
 
-    addOption() {
-        for (let i = new Date('01/22/2020').getTime(); i <= Date.now(); i += 86500000) {
-            $('#start').append(`<option value="${i}">${moment(i).format('L')}</option>`)
-            $('#end').append(`<option value="${i}" selected="selected">${moment(i).format('L')}</option>`)
-        }
+    createChartTemplate(){
+        $('#chart-template').empty().append('<canvas id="myChart" width="400" height="400"></canvas>')
     }
 
     renderEror() {//not working yet
-        $('#myChart').append('<div id="eror">Please try diffrent country name</div>')
+        $('#chart-template').empty().append('<div id="eror">Please try diffrent country name</div>')
     }
 
     renderStats(worldstats) {
